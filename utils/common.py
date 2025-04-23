@@ -1,6 +1,5 @@
 import argparse
 import os
-import pickle
 import shutil
 from collections import Counter
 
@@ -16,6 +15,7 @@ from statics import (
     DE_REG_LAW_NAMES_COMPILED_PATH,
     DE_REG_LAW_NAMES_PATH,
 )
+import fickling
 
 ##########
 # Pipeline
@@ -94,7 +94,7 @@ def load_law_names_compiled(regulations):
         DE_REG_LAW_NAMES_COMPILED_PATH if regulations else DE_LAW_NAMES_COMPILED_PATH,
         "rb",
     ) as f:
-        return pickle.load(f)
+        return fickling.load(f)
 
 
 def get_stemmed_law_names_for_filename(filename, law_names):
