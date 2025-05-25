@@ -5,6 +5,7 @@ import networkx as nx
 from lxml import etree
 from quantlaw.utils.files import ensure_exists, list_dir
 from quantlaw.utils.pipeline import PipelineStep
+import lxml.etree
 
 
 class HierarchyGraphStep(PipelineStep):
@@ -126,7 +127,7 @@ def build_graph(filename, add_subseqitems=False):
     """
 
     # Read input file
-    tree = etree.parse(filename)
+    tree = etree.parse(filename, parser=lxml.etree.XMLParser(resolve_entities=False))
 
     document_type = (
         tree.xpath("/document")[0].attrib.get("document_type", None)

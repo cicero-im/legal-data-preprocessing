@@ -678,7 +678,7 @@ def parse_cfr_xml_file(xml_file):
     file_year = match.groupdict()["y"]
     title_number = match.groupdict()["t"]
     volume_number = match.groupdict()["v"]
-    xml_doc = lxml.etree.parse(xml_file)
+    xml_doc = lxml.etree.parse(xml_file, parser=lxml.etree.XMLParser(resolve_entities=False))
 
     title_output_elements = []
 

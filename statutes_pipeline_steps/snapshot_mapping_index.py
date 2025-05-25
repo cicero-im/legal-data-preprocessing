@@ -8,6 +8,7 @@ from quantlaw.utils.pipeline import PipelineStep
 from regex import regex
 
 from utils.common import get_snapshot_law_list
+import lxml.etree
 
 
 class SnapshotMappingIndexStep(PipelineStep):
@@ -85,7 +86,7 @@ def get_texttags_to_compare(snapshot, source_texts, law_names_data, dataset):
     whitespace_pattern = regex.compile(r"[\s\n]+")
 
     for file in files:
-        tree = etree.parse(file)
+        tree = etree.parse(file, parser=lxml.etree.XMLParser(resolve_entities=False))
         for text_tag in tree.xpath("//text"):
             item = text_tag.getparent()
 

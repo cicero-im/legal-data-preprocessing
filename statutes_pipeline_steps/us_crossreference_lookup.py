@@ -63,7 +63,7 @@ class UsCrossreferenceLookup(RegulationsPipelineStep):
         data = []
         for file in yearfiles:
             with open(file, encoding="utf8") as f:
-                file_elem = lxml.etree.parse(f)
+                file_elem = lxml.etree.parse(f, parser=lxml.etree.XMLParser(resolve_entities=False))
             for node in file_elem.xpath("//*[@citekey]"):
                 data.append([node.attrib["key"], node.attrib["citekey"]])
             if self.detailed_crossreferences:

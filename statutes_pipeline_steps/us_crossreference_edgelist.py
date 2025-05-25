@@ -80,7 +80,7 @@ class UsCrossreferenceEdgelist(RegulationsPipelineStep):
 
     def make_edge_list(self, yearfile_path, key_dict):
         with open(yearfile_path, encoding="utf8") as f:
-            file_elem = lxml.etree.parse(f)
+            file_elem = lxml.etree.parse(f, parser=lxml.etree.XMLParser(resolve_entities=False))
         edge_list = []
 
         if self.detailed_crossreferences:
