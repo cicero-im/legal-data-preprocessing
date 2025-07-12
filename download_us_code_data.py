@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from quantlaw.utils.files import ensure_exists
 
 from statics import US_INPUT_PATH
+from security import safe_requests
 
 INDEX_URL = (
     "https://uscode.house.gov/download/annualhistoricalarchives/downloadxhtml.shtml"
@@ -19,7 +20,7 @@ DOWNLOAD_BASE_URL = "https://uscode.house.gov/download/annualhistoricalarchives/
 def download(ref):
     year = re.match(r"XHTML/(\d+)\.zip", ref)[1]
     print("loading", year)
-    r = requests.get(DOWNLOAD_BASE_URL + ref, stream=True)
+    r = safe_requests.get(DOWNLOAD_BASE_URL + ref, stream=True)
     if r.status_code == 200:
         zip_path = f"{US_INPUT_PATH}/{year}.zip"
         with open(zip_path, "wb") as f:
