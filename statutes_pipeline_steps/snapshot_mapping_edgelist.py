@@ -1,6 +1,5 @@
 import json
 import os
-import pickle
 from collections import Counter, deque
 from multiprocessing import Pool
 
@@ -15,6 +14,7 @@ from regex import regex
 
 from utils.common import get_snapshot_law_list, invert_dict_mapping_unique
 from utils.string_list_contains import StringContainsAlign
+import fickling
 
 
 class SnapshotMappingEdgelistStep(PipelineStep):
@@ -138,7 +138,7 @@ class SnapshotMappingEdgelistStep(PipelineStep):
 
     def load_pickle(self, snapshot):
         with open(os.path.join(self.source, snapshot + ".pickle"), "rb") as f:
-            raw_data = pickle.load(f)
+            raw_data = fickling.load(f)
         return raw_data
 
 
