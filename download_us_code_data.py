@@ -19,7 +19,7 @@ DOWNLOAD_BASE_URL = "https://uscode.house.gov/download/annualhistoricalarchives/
 def download(ref):
     year = re.match(r"XHTML/(\d+)\.zip", ref)[1]
     print("loading", year)
-    r = requests.get(DOWNLOAD_BASE_URL + ref, stream=True)
+    r = requests.get(DOWNLOAD_BASE_URL + ref, stream=True, timeout=60)
     if r.status_code == 200:
         zip_path = f"{US_INPUT_PATH}/{year}.zip"
         with open(zip_path, "wb") as f:
@@ -31,7 +31,7 @@ def download(ref):
 
 
 if __name__ == "__main__":
-    response = requests.get(INDEX_URL)
+    response = requests.get(INDEX_URL, timeout=60)
     soup = BeautifulSoup(str(response.content), "lxml")
     refs = []
     for s_string in soup.find_all(text=" zip file]"):

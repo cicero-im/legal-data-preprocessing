@@ -14,7 +14,7 @@ def download(year):
     zip_path = f"{US_REG_INPUT_PATH}/{year}.zip"
     if not os.path.exists(zip_path):
         print("loading", year)
-        r = requests.get(DOWNLOAD_BASE_URL.format(year, year), stream=True)
+        r = requests.get(DOWNLOAD_BASE_URL.format(year, year), stream=True, timeout=60)
         if r.status_code == 200:
             with open(zip_path, "wb") as f:
                 r.raw.decode_content = True
