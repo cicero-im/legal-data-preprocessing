@@ -33,7 +33,7 @@ def download_item(link_text):
 
 def download():
     ensure_exists(DE_DECISIONS_TEMP_DATA_PATH)
-    toc = requests.get("https://www.rechtsprechung-im-internet.de/rii-toc.xml").text
+    toc = requests.get("https://www.rechtsprechung-im-internet.de/rii-toc.xml", timeout=60).text
     with open(DE_DECISIONS_DOWNLOAD_TOC, "w") as f:
         f.write(toc)
 
